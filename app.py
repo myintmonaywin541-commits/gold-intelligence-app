@@ -75,3 +75,36 @@ with col2:
 
 st.divider()
 st.info(" EA ကနေ အော်ဒါဖွင့်တိုင်း ဒီ Dashboard မှာ အလိုအလျောက် Update ဖြစ်နေမှာပါ။")
+import streamlit as st
+
+st.set_page_config(page_title="Gold Pro Live Monitor", layout="wide")
+
+# Risk 1:5 Calculation Logic
+def get_rr_stats(lot):
+    risk = (lot / 0.01) * 18.0
+    reward = (lot / 0.01) * 90.0
+    return risk, reward
+
+st.title(" Gold Intelligence: EA Live Tracker")
+
+# URL ကနေ Lot Size ကို ဖတ်ယူခြင်း (EA က ပို့ပေးမည့် data)
+query_params = st.query_params
+ea_lot = float(query_params.get("lot", 0.01))
+
+risk_amt, reward_amt = get_rr_stats(ea_lot)
+
+# UI Display
+col1, col2, col3 = st.columns(3)
+
+with col1:
+    st.metric("Current Lot Size", f"{ea_lot}")
+with col2:
+    st.metric("Potential Loss (SL)", f"-${risk_amt:,.2f}", delta_color="inverse")
+with col3:
+    st.metric("Potential Profit (TP)", f"+${reward_amt:,.2f}")
+
+st.divider()
+st.subheader(" Strategy Breakdown (Risk 1:5)")
+st.write(f"Lot {ea_lot} အသုံးပြုထားသဖြင့် အရှုံးခံနိုင်ရည်မှာ **${risk_amt}** ဖြစ်ပြီး၊ ပန်းတိုင်အမြတ်မှာ **${reward_amt}** ဖြစ်ပါသည်။")
+
+
