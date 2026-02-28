@@ -5,6 +5,8 @@ from bs4 import BeautifulSoup
 
 # Layout သတ်မှတ်ခြင်း
 st.set_page_config(page_title="Gold Intelligence Pro", layout="wide")
+TOKEN ="8792478423:AAGOx_GVloS9xdMWmP2Fe5Y6_cMdQ3q3Ecs"
+CHAT_ID = "6129668150"
 
 # Sidebar - Live Status
 st.sidebar.title(" XAU/USD Monitor")
