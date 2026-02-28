@@ -1,39 +1,41 @@
 import streamlit as st
-import pandas as pd
 import requests
-from bs4 import BeautifulSoup
 
-# Layout သတ်မှတ်ခြင်း
+# 1. Config
 st.set_page_config(page_title="Gold Intelligence Pro", layout="wide")
-TOKEN ="8792478423:AAGOx_GVloS9xdMWmP2Fe5Y6_cMdQ3q3Ecs"
-CHAT_ID = "6129668150"
 
-# Sidebar - Live Status
-st.sidebar.title(" XAU/USD Monitor")
-st.sidebar.metric("Live Price", "5278.50", "+1.2%")
-st.sidebar.write("EA Status: **ACTIVE (Lot 0.05)**")
-st.sidebar.write("Current Signal: **BULLISH**")
+# 2. Telegram Settings (ဒီနေရာမှာ လူကြီးမင်းရဲ့ အချက်အလက် ထည့်ပါ)
+TOKEN = "လူကြီးမင်းရဲ့_TOKEN_ဒီမှာထည့်"TOKEN ="8792478423:AAGOx_GVloS9xdMWmP2Fe5Y6_cMdQ3q3Ecs"
+CHAT_ID = "လူကြီးမင်းရဲ့_CHAT_ID_ဒီမှာထည့်"CHAT_ID = "6129668150"
 
-# Main Dashboard
-st.title(" Gold Market Intelligence Dashboard (2026)")
-st.markdown("---")
+def send_telegram_alert(message):
+    url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
+    payload = {"chat_id": CHAT_ID, "text": message, "parse_mode": "HTML"}
+    try:
+        requests.post(url, data=payload)
+    except:
+        pass
+
+# 3. UI Dashboard
+st.title("🏆 Gold Intelligence Dashboard (2026)")
+st.divider()
 
 col1, col2 = st.columns([2, 1])
 
 with col1:
-    st.header(" World Gold Council (WGC) Insights")
-    try:
-        # WGC မှ Data ဆွဲယူခြင်း (Example Logic)
-        st.info(" Central Banks increased gold reserves by 15% this quarter.")
-        st.success(" ETF Inflows: Positive momentum in Western markets.")
-    except:
-        st.write("WGC Data Fetching...")
+    st.header("🌐 Market Insights")
+    st.info("💡 **WGC Update:** Gold demand is increasing in early 2026.")
+    st.subheader("📰 News Feed")
+    st.write("• US Inflation data is driving gold prices higher.")
 
-    st.header(" High Impact Fundamental News")
-    # News Feed
-    news = [
-        {"time": "10:30 AM", "event": "US PCE Data lower than expected", "impact": "Bullish"},
-        {"time": "02:15 PM", "event": "Geopolitical tension in Middle East", "impact": "High Bullish"},
+with col2:
+    st.header("📊 Sentiment")
+    st.success("Current Sentiment: **Strong Buy**")
+    st.divider()
+    # ဤနေရာတွင် "Send Test Alert" ခလုတ်ကို ပြန်ထည့်ပေးထားပါတယ်
+    if st.button("Send Test Alert"):
+        send_telegram_alert("🔔 <b>Gold Pro System:</b> Connection Successful!")
+        st.write("Telegram ဆီ စာပို့လိုက်ပါပြီ!")
         {"time": "04:00 PM", "event": "DXY Dollar Index Weakness", "impact": "Moderate Bullish"}
     ]
     for item in news:
