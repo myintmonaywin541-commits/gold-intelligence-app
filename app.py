@@ -51,3 +51,8 @@ with col2:
 
 st.divider()
 st.caption("Developed for Professional Gold Trading - 2026 Strategy")
+    st.divider()
+    st.header(" Telegram Controls")
+    if st.button("Send Test Alert"):
+        send_telegram_alert(" <b>Gold Pro System:</b> Dashboard Connected Successfully!")
+        st.write("Alert Sent to your phone!")
