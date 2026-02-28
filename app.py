@@ -5,8 +5,8 @@ import requests
 st.set_page_config(page_title="Gold Intelligence Pro", layout="wide")
 
 # 2. Telegram Settings (ဒီနေရာမှာ လူကြီးမင်းရဲ့ အချက်အလက် ထည့်ပါ)
-TOKEN = "လူကြီးမင်းရဲ့_TOKEN_ဒီမှာထည့်"
-CHAT_ID = "လူကြီးမင်းရဲ့_CHAT_ID_ဒီမှာထည့်"
+TOKEN = "8625424625:AAG06Yoem1vN71_3iVTPkI7qvS1Z3yO0jqM"
+CHAT_ID = "6129668150"
 
 def send_telegram_alert(message):
     url = f"https://api.telegram.org/bot{TOKEN}/sendMessage"
